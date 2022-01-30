@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+import { connect } from "react-redux";
+import { handleLogin } from "./redux/actions/actions";
+
 const Login = ({ handleLogin }) => {
 	const [credentials, setCredentials] = useState({
 		email: "",
@@ -39,7 +42,6 @@ const Login = ({ handleLogin }) => {
 				password: password,
 			})
 			.then(response => {
-				console.log(response.data);
 				handleLogin();
 			})
 			.catch(err => alert("Invalid Account!"));
@@ -74,4 +76,4 @@ const Login = ({ handleLogin }) => {
 	);
 };
 
-export default Login;
+export default connect(null, { handleLogin })(Login);

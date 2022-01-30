@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+import { connect } from "react-redux";
+import { handleLogin } from "./redux/actions/actions";
+
 const SignIn = ({ handleLogin }) => {
 	const [credentials, setCredentials] = useState({
 		firstName: "",
@@ -55,7 +58,6 @@ const SignIn = ({ handleLogin }) => {
 				password: password,
 			})
 			.then(response => {
-				console.log(response.data);
 				handleLogin();
 			})
 			.catch(err => console.log(err));
@@ -107,4 +109,4 @@ const SignIn = ({ handleLogin }) => {
 	);
 };
 
-export default SignIn;
+export default connect(null, { handleLogin })(SignIn);

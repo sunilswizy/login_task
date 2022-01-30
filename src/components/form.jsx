@@ -1,23 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Home from "./homescreen";
 
-const Form = () => {
-	const [islogged, setLogged] = useState(false);
+import { connect } from "react-redux";
 
-	const handleLogin = () => {
-		setLogged(true);
-	};
-
+const Form = ({ islogged }) => {
 	return (
 		<div className='form-conrainer'>
-			{islogged ? (
-				<h1>Hi you are logged in!</h1>
-			) : (
-				<Home handleLogin={handleLogin} />
-			)}
+			{islogged ? <h1>Hi you are logged in!</h1> : <Home />}
 		</div>
 	);
 };
 
-export default Form;
+const mapStateToProps = state => ({
+	islogged: state.login.isLogged,
+});
+
+export default connect(mapStateToProps, null)(Form);
